@@ -54,6 +54,7 @@ class _MyAppState extends State<MyApp> {
       bool serviceStatus = await _locationService.serviceEnabled();
       print("Service status: $serviceStatus");
       if (serviceStatus) {
+        LocationPermissionState state = await _locationService.fetchLocationPermissionState();
         _permission = await _locationService.requestPermission();
         print("Permission: $_permission");
         if (_permission) {

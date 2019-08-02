@@ -127,11 +127,25 @@
             [alert show];
             result(@(0));
         }
+    } else if ([call.method isEqualToString:@"fetchLocationPermissionState"]) {
+    
+        NSString *status = [self fetchLocationPermissionState];
+        result(status);
+        
     } else {
         result(FlutterMethodNotImplemented);
     }
 }
 
+-(NSString *)fetchLocationPermissionState {
+    CLAuthorizationStatus authorizationstate = [CLLocationManager authorizationStatus];
+    if (authorizationstate == kCLAuthorizationStatusNotDetermined) {
+        return @"NotDetermined";
+    } else if (authorizationstate == kCLAuthorizationStatusAuthorizedAlways || authorizationstate == kCLAuthorizationStatusAuthorizedWhenInUse) {
+        return @"Granted";
+    }
+    return @"Denied";
+}
 
 -(void) requestPermission {
     if ([[NSBundle mainBundle] objectForInfoDictionaryKey:@"NSLocationWhenInUseUsageDescription"] != nil) {

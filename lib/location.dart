@@ -37,6 +37,8 @@ class LocationData {
 /// Precision of the Location
 enum LocationAccuracy { POWERSAVE, LOW, BALANCED, HIGH, NAVIGATION }
 
+enum LocationPermissionState { NotDetermined, Granted, Denied }
+
 class Location {
   static const MethodChannel _channel = const MethodChannel('lyokone/location');
   static const EventChannel _stream =
@@ -76,6 +78,18 @@ class Location {
   /// Request the activate of the location service
   Future<bool> requestService() =>
       _channel.invokeMethod('requestService').then((result) => result == 1);
+
+  /// Request the activate of the location service
+  Future<LocationPermissionState> fetchLocationPermissionState() async {
+    var result = await _channel.invokeMethod('fetchLocationPermissionState');
+    if (result is String) {
+      if (result == "NotDetermined") { return LocationPermissionState.NotDetermined; }
+      else if (result == "Granted") { return LocationPermissionState.Granted; }
+      return LocationPermissionState.Denied;
+    }
+    return LocationPermissionState.NotDetermined;
+  }
+
 
   /// Returns a stream of location information.
   Stream<LocationData> onLocationChanged() {
