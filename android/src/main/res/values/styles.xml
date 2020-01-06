@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <style name="AppThemeDialog" parent="Theme.AppCompat.Light.Dialog.Alert">
+        <!-- Customize your theme here. -->
+        <item name="android:colorPrimary">#E21B34</item>
+        <item name="android:colorPrimaryDark">#E21B34</item>
+        <item name="android:colorAccent">#E21B34</item>
+    </style>
+</resources
