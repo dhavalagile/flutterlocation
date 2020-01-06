@@ -473,7 +473,7 @@ public class LocationPlugin implements MethodCallHandler, StreamHandler, PluginR
 
     private void openPermissionSettings()
     {
-        new AlertDialog.Builder(new ContextThemeWrapper(activity,R.style.AppTheme)).setTitle("Please allow permission.")
+        new AlertDialog.Builder(new ContextThemeWrapper(activity,R.style.AppThemeDialog)).setTitle("Please allow permission.")
                 .setPositiveButton("Okay", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
